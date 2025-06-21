@@ -1,0 +1,14 @@
+[project]
+name = "termgpt"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10.12"
+dependencies = [
+    "openai>=1.90.0",
+    "pydantic>=2.11.7",
+    "pydantic-settings>=2.10.0",
+    "requests>=2.32.4",
+    "rich>=14.0.0",
+    "typer>=0.16.0",
+]
