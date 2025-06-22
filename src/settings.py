@@ -34,23 +34,3 @@ class AppSettings(BaseSettings):
         env_prefix="TERMGPT_",
     )
 
-def get_settings():
-    """Get application settings, always reading from the config file"""
-    if CONFIG_FILE.exists():
-        # Read the file manually
-        import json
-        try:
-            with open(CONFIG_FILE, "r") as f:
-                config_data = json.load(f)
-            # Create settings from the loaded data
-            return AppSettings.model_validate(config_data)
-        except json.JSONDecodeError as e:
-            print(f"Error parsing config file: {e}")
-        except PermissionError:
-            print(f"Permission denied when reading {CONFIG_FILE}")
-        except Exception as e:
-            print(f"Unexpected error reading config file: {e}")
-    
-    # Fall back to default settings if file doesn't exist or has errors
-    return AppSettings()
-

@@ -16,7 +16,3 @@ DEFAULT_MODEL_CONFIG = {
 
 # Default profile values
 DEFAULT_PROFILE_NAME = "default"
-
-# Application configuration
-APP_NAME = "TermGPT"
-APP_VERSION = "0.1.0"
