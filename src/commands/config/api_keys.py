@@ -6,8 +6,8 @@ from core import profiles
 from utils import validators
 
 def set_api_key_command(
-    api_key: str = typer.Option(..., prompt=True, hide_input=True, help="OpenAI API key"),
-    profile: str = typer.Option(None, help="Profile name (uses default profile if not specified)")
+    api_key: str = typer.Option(..., prompt=True, hide_input=True, help="OpenAI API key", show_default=False),
+    profile: str = typer.Option(None, help="Profile name (uses default profile if not specified)", show_default=False)
 ):
     # Ensure config exists
     settings = config.ensure_config_exists()

@@ -8,10 +8,10 @@ from core import config
 from utils import validators
 
 def create_profile_command(
-    name: str = typer.Option(..., prompt=True, help="Profile name"),
-    api_key: str = typer.Option(None, prompt=False, hide_input=True, help="OpenAI API key"),
-    model: str = typer.Option(None, help="Default model for this profile"),
-    set_as_default: bool = typer.Option(None, help="Set this profile as the default")
+    name: str = typer.Option(..., prompt=True, help="Profile name", show_default=False),
+    api_key: str = typer.Option(None, prompt=False, hide_input=True, help="OpenAI API key", show_default=False),
+    model: str = typer.Option(None, help="Default model for this profile", show_default=False),
+    set_as_default: bool = typer.Option(None, help="Set this profile as the default", show_default=False)
 ):
     settings = config.ensure_config_exists()
     if not settings:
@@ -102,7 +102,7 @@ def list_profiles_command():
         rprint(f"  • {profile.name}{is_default} - API Key: {has_key} - Model: {profile.default_model}")
 
 def set_default_profile_command(
-    name: str = typer.Argument(..., help="Profile name to set as default")
+    name: str = typer.Argument(..., help="Profile name to set as default", show_default=False)
 ):
     settings = config.ensure_config_exists()
     if not settings:
