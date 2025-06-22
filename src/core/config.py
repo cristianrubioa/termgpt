@@ -2,7 +2,8 @@ import json
 from typing import Optional
 
 from rich import print as rprint
-from settings import AppSettings, CONFIG_FILE, CONFIG_DIR
+from settings import AppSettings
+from default import CONFIG_FILE, CONFIG_DIR
 
 def get_settings() -> AppSettings:
     """Get application settings, creating default if not exists

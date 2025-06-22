@@ -12,3 +12,13 @@ dependencies = [
     "rich>=14.0.0",
     "typer>=0.16.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.3.0",
+    "ipdb>=0.13.13",
+    "isort>=5.13.2",
+    "ruff>=0.3.0",
+    "pytest>=8.0.0",
+]
+

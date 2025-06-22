@@ -1,11 +1,11 @@
 import typer
 from rich import print as rprint
 
-from core.config import ensure_config_exists, save_settings
-from core.profiles import find_profile
-from utils.validators import prompt_for_api_key
 from settings import ProfileConfig, ModelConfig
 from default import DEFAULT_MODEL
+
+from core import config
+from utils import validators
 
 def create_profile_command(
     name: str = typer.Option(..., prompt=True, help="Profile name"),
@@ -13,7 +13,7 @@ def create_profile_command(
     model: str = typer.Option(None, help="Default model for this profile"),
     set_as_default: bool = typer.Option(None, help="Set this profile as the default")
 ):
-    settings = ensure_config_exists()
+    settings = config.ensure_config_exists()
     if not settings:
         return
     
@@ -29,11 +29,11 @@ def create_profile_command(
     
     # Request API key if not provided
     if api_key is None:
-        api_key = prompt_for_api_key()
+        api_key = validators.prompt_for_api_key()
     
     # Request model if not provided, showing the default
     if model is None:
-        model = typer.prompt(f"Enter default model", default=DEFAULT_MODEL)
+        model = typer.prompt("Enter default model", default=DEFAULT_MODEL)
     
     # Create new profile
     new_profile = ProfileConfig(name=name, api_key=api_key, default_model=model)
@@ -45,17 +45,17 @@ def create_profile_command(
         default_config = ModelConfig()
         
         temperature = typer.prompt(
-            f"Temperature (0.0-1.0)", 
+            "Temperature (0.0-1.0)", 
             default=default_config.temperature, 
             type=float
         )
         max_tokens = typer.prompt(
-            f"Max tokens", 
+            "Max tokens", 
             default=default_config.max_tokens, 
             type=int
         )
         top_p = typer.prompt(
-            f"Top P (0.0-1.0)", 
+            "Top P (0.0-1.0)", 
             default=default_config.top_p, 
             type=float
         )
@@ -87,11 +87,11 @@ def create_profile_command(
         rprint(f"[green]Profile '{name}' set as default.[/green]")
     
     # Save configuration
-    if save_settings(settings):
+    if config.save_settings(settings):
         rprint(f"[green]Profile '{name}' created successfully.[/green]")
 
 def list_profiles_command():
-    settings = ensure_config_exists()
+    settings = config.ensure_config_exists()
     if not settings:
         return
     
@@ -104,7 +104,7 @@ def list_profiles_command():
 def set_default_profile_command(
     name: str = typer.Argument(..., help="Profile name to set as default")
 ):
-    settings = ensure_config_exists()
+    settings = config.ensure_config_exists()
     if not settings:
         return
     
@@ -118,5 +118,5 @@ def set_default_profile_command(
     settings.default_profile = name
     
     # Save configuration
-    if save_settings(settings):
+    if config.save_settings(settings):
         rprint(f"[green]Default profile set to '{name}'.[/green]")

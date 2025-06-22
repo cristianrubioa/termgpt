@@ -1,5 +1,4 @@
-"""Profile management"""
-from typing import Optional, Tuple, Dict, Any
+from typing import Optional, Tuple
 
 from rich import print as rprint
 from settings import AppSettings, ProfileConfig

@@ -2,7 +2,11 @@
 from typing import List, Optional
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from default import *
+from default import (
+    DEFAULT_MODEL,
+    DEFAULT_MODEL_CONFIG,
+    DEFAULT_PROFILE_NAME,
+)
 
 class ModelConfig(BaseModel):
     """Configuration for an OpenAI model"""

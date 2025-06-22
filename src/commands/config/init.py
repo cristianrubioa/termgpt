@@ -4,7 +4,7 @@ from rich import print as rprint
 from core import config
 from core import profiles
 from utils import validators
-from settings import CONFIG_FILE
+from default import CONFIG_FILE
 
 def init_command():
     if CONFIG_FILE.exists() and not typer.confirm("Configuration file already exists. Do you want to overwrite it?"):
