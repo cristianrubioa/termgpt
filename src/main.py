@@ -1,12 +1,13 @@
 import typer
 
-from cli.config.commands import config
-# from cli.variables.commands import app as variable_app
+from commands.config import app as config_app
+# from src.commands.chat import chat_app
 
-app = typer.Typer()
+app = typer.Typer(help="CLI tool for interacting with OpenAI models")
 
-app.command(help="Configure general settings for the CLI.")(config)
-# app.add_typer(variable_app, name="variables")
+app.add_typer(config_app, name="config", help="Configure settings like API tokens and defaults")
+# app.add_typer(profiles_app, name="profiles", help="Manage different user profiles")
+# app.add_typer(chat_app, name="chat", help="Start a chat session with an AI model")
 
 if __name__ == "__main__":
     app()
